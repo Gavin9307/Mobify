@@ -24,7 +24,7 @@ if (isset($_POST['add_product'])) {
         }
     }
 
-    echo "<script>location.href='./index.php?add_brand';</script>";
+    echo "<script>location.href='./index.php?add_product';</script>";
 }
 ?>
 
