@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2023 at 08:16 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 03, 2023 at 11:17 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `brand` (
   `b_id` int(11) NOT NULL,
   `b_name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `brand`
@@ -40,7 +40,8 @@ INSERT INTO `brand` (`b_id`, `b_name`) VALUES
 (11, 'Apple'),
 (12, 'Samsung'),
 (13, 'Realme'),
-(14, 'Redmi');
+(14, 'Redmi'),
+(15, 'Poco');
 
 -- --------------------------------------------------------
 
@@ -54,7 +55,7 @@ CREATE TABLE `cart` (
   `c_id` int(11) DEFAULT NULL,
   `ct_total_items` int(11) DEFAULT NULL,
   `ct_total` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -65,12 +66,19 @@ CREATE TABLE `cart` (
 CREATE TABLE `customer` (
   `c_id` int(11) NOT NULL,
   `c_fname` varchar(50) NOT NULL,
-  `c_lname` varchar(50) NOT NULL,
   `c_add` varchar(250) NOT NULL,
   `c_uname` varchar(50) NOT NULL,
   `c_pwd` varchar(20) NOT NULL,
-  `c_email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `c_email` varchar(50) NOT NULL,
+  `c_phno` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`c_id`, `c_fname`, `c_add`, `c_uname`, `c_pwd`, `c_email`, `c_phno`) VALUES
+(1, 'Abhinav', 'akfciqgufciabscnkbakjbca', '', '12345678', 'ejvca@hmadcvj.com', 9312345678);
 
 -- --------------------------------------------------------
 
@@ -85,7 +93,7 @@ CREATE TABLE `orders` (
   `ct_id` int(11) DEFAULT NULL,
   `od_date` date DEFAULT NULL,
   `od_price` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -100,7 +108,7 @@ CREATE TABLE `orderstrack` (
   `track_id` int(11) NOT NULL,
   `track_status` varchar(50) DEFAULT NULL,
   `del_date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -112,7 +120,7 @@ CREATE TABLE `payment` (
   `pt_id` int(11) NOT NULL,
   `c_id` int(11) DEFAULT NULL,
   `pt_total` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -128,14 +136,15 @@ CREATE TABLE `product` (
   `s_id` int(11) DEFAULT NULL,
   `p_pic` varchar(255) NOT NULL,
   `b_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`p_id`, `p_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `b_id`) VALUES
-(1, 'Samsung Galaxy S22 Ultra', 85000, '5G Ready powered by Galaxy’s first 4nm processor. Our fastest, most powerful chip ever.', 3, 'samsung_galaxy_ultra.jpg', 12);
+(1, 'Samsung Galaxy S22 Ultra', 85000, '5G Ready powered by Galaxy’s first 4nm processor. Our fastest, most powerful chip ever.', 3, 'samsung_galaxy_ultra.jpg', 12),
+(2, 'Apple iPhone 13', 50499, 'Advanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording', 4, 'iphone 13.jpg', 11);
 
 -- --------------------------------------------------------
 
@@ -150,14 +159,15 @@ CREATE TABLE `seller` (
   `s_uname` varchar(50) NOT NULL,
   `s_pwd` varchar(20) NOT NULL,
   `s_email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `seller`
 --
 
 INSERT INTO `seller` (`s_id`, `s_name`, `s_add`, `s_uname`, `s_pwd`, `s_email`) VALUES
-(3, 'Margao Electronics', 'Mayfair Apartment, Margao, Goa - 403601 (Near Margao Muncipality, Behind Canara Bank)', 'melectronics', '12345678', 'margaoelectronics@gmail.com');
+(3, 'Margao Electronics', 'Mayfair Apartment, Margao, Goa - 403601 (Near Margao Muncipality, Behind Canara Bank)', 'melectronics', '12345678', 'margaoelectronics@gmail.com'),
+(4, 'Amey Retailer', 'Curtorim Goa', 'aretailer', '12345678', 'example123@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -235,25 +245,25 @@ ALTER TABLE `seller`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `b_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `b_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

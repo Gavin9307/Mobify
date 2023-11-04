@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2023 at 11:10 AM
+-- Generation Time: Nov 03, 2023 at 11:19 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -18,8 +18,30 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecom`
+-- Database: `mobify`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
+
+CREATE TABLE `brand` (
+  `b_id` int(11) NOT NULL,
+  `b_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`b_id`, `b_name`) VALUES
+(11, 'Apple'),
+(12, 'Samsung'),
+(13, 'Realme'),
+(14, 'Redmi'),
+(15, 'Poco');
 
 -- --------------------------------------------------------
 
@@ -44,12 +66,19 @@ CREATE TABLE `cart` (
 CREATE TABLE `customer` (
   `c_id` int(11) NOT NULL,
   `c_fname` varchar(50) NOT NULL,
-  `c_lname` varchar(50) NOT NULL,
   `c_add` varchar(250) NOT NULL,
   `c_uname` varchar(50) NOT NULL,
   `c_pwd` varchar(20) NOT NULL,
-  `c_email` varchar(50) NOT NULL
+  `c_email` varchar(50) NOT NULL,
+  `c_phno` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`c_id`, `c_fname`, `c_add`, `c_uname`, `c_pwd`, `c_email`, `c_phno`) VALUES
+(1, 'Abhinav', 'akfciqgufciabscnkbakjbca', '', '12345678', 'ejvca@hmadcvj.com', 9312345678);
 
 -- --------------------------------------------------------
 
@@ -105,8 +134,17 @@ CREATE TABLE `product` (
   `p_price` float NOT NULL,
   `p_desc` varchar(250) NOT NULL,
   `s_id` int(11) DEFAULT NULL,
-  `p_pic` text NOT NULL
+  `p_pic` varchar(255) NOT NULL,
+  `b_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`p_id`, `p_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `b_id`) VALUES
+(1, 'Samsung Galaxy S22 Ultra', 85000, '5G Ready powered by Galaxy’s first 4nm processor. Our fastest, most powerful chip ever.', 3, 'samsung_galaxy_ultra.jpg', 12),
+(2, 'Apple iPhone 13', 50499, 'Advanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording', 4, 'iphone 13.jpg', 11);
 
 -- --------------------------------------------------------
 
@@ -116,8 +154,7 @@ CREATE TABLE `product` (
 
 CREATE TABLE `seller` (
   `s_id` int(11) NOT NULL,
-  `s_fname` varchar(50) NOT NULL,
-  `s_lname` varchar(50) NOT NULL,
+  `s_name` varchar(50) NOT NULL,
   `s_add` varchar(250) NOT NULL,
   `s_uname` varchar(50) NOT NULL,
   `s_pwd` varchar(20) NOT NULL,
@@ -125,8 +162,22 @@ CREATE TABLE `seller` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `seller`
+--
+
+INSERT INTO `seller` (`s_id`, `s_name`, `s_add`, `s_uname`, `s_pwd`, `s_email`) VALUES
+(3, 'Margao Electronics', 'Mayfair Apartment, Margao, Goa - 403601 (Near Margao Muncipality, Behind Canara Bank)', 'melectronics', '12345678', 'margaoelectronics@gmail.com'),
+(4, 'Amey Retailer', 'Curtorim Goa', 'aretailer', '12345678', 'example123@gmail.com');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`b_id`);
 
 --
 -- Indexes for table `cart`
@@ -174,7 +225,8 @@ ALTER TABLE `payment`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`p_id`),
-  ADD KEY `s_id` (`s_id`);
+  ADD KEY `s_id` (`s_id`),
+  ADD KEY `b_id` (`b_id`);
 
 --
 -- Indexes for table `seller`
@@ -190,22 +242,28 @@ ALTER TABLE `seller`
 --
 
 --
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `b_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -244,7 +302,8 @@ ALTER TABLE `payment`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`s_id`) REFERENCES `seller` (`s_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`s_id`) REFERENCES `seller` (`s_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`b_id`) REFERENCES `brand` (`b_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

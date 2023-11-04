@@ -66,6 +66,7 @@
             <hr>
             <h2 class="text-light">Products</h2><hr>
         </div>
+
         <div class="row">
             <div class="col-md-2 bg-success-subtle p-4">
                 <ul class="navbar-nav me-auto">
@@ -100,107 +101,36 @@
             </div>
             <div class="col-md-10 gap-4 ">
                 <div class="row d-flex justify-content-evenly mt-4">
-                    <div class="col-md-4 mb-4 " style="max-width: 400px;">
-                        <div class="card">
-                            <img src="./assets/images/samsung_galaxy_ultra.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Samsung Galaxy S22 Ultra 5G</h5>
-
-                                <h6 class="card-text">
-                                    Rs.85,000
-                                </h6>
-                                <a href="#" class="btn btn-success">Buy Now</a>
-                                <a href="#" class="btn btn-outline-success ">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
+                    <?php
+                        include("./includes/connect.php");
+                        $select_query = "select * from `product`";
+                        $result_query = mysqli_query($conn,$select_query);
+                        while($row_data = mysqli_fetch_assoc($result_query)){
+                            $product_pic=$row_data['p_pic'];
+                            $product_name=$row_data['p_name'];
+                            $product_price=$row_data['p_price'];
+                            echo "<div class='col-md-4 mb-4 ' style='max-width: 400px;'>
+                            <div class='card'>
+                                <img src='./assets/Mobile_Images/$product_pic' class='card-img-top' alt='...'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>$product_name</h5>
+    
+                                    <h6 class='card-text'>Rs 
+                                    $product_price
+                                    </h6>
+                                    <a href='#' class='btn btn-success'>Buy Now</a>
+                                    <a href='#' class='btn btn-outline-success '>
+                                        <i class='fa-solid fa-cart-shopping'></i>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4" style="max-width: 400px;">
-                        <div class="card">
-                            <img src="./assets/images/samsung_galaxy_ultra.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Samsung Galaxy S22 Ultra 5G</h5>
-
-                                <h6 class="card-text">
-                                    Rs.85,000
-                                </h6>
-                                <a href="#" class="btn btn-success">Buy Now</a>
-                                <a href="#" class="btn btn-outline-success ">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4" style="max-width: 400px;">
-                        <div class="card">
-                            <img src="./assets/images/samsung_galaxy_ultra.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Samsung Galaxy S22 Ultra 5G</h5>
-
-                                <h6 class="card-text">
-                                    Rs.85,000
-                                </h6>
-                                <a href="#" class="btn btn-success">Buy Now</a>
-                                <a href="#" class="btn btn-outline-success ">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-evenly">
-                    <div class="col-md-4 mb-4" style="max-width: 400px;">
-                        <div class="card">
-                            <img src="./assets/images/samsung_galaxy_ultra.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Samsung Galaxy S22 Ultra 5G</h5>
-
-                                <h6 class="card-text">
-                                    Rs.85,000
-                                </h6>
-                                <a href="#" class="btn btn-success">Buy Now</a>
-                                <a href="#" class="btn btn-outline-success ">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4" style="max-width: 400px;">
-                        <div class="card">
-                            <img src="./assets/images/samsung_galaxy_ultra.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Samsung Galaxy S22 Ultra 5G</h5>
-
-                                <h6 class="card-text">
-                                    Rs.85,000
-                                </h6>
-                                <a href="#" class="btn btn-success">Buy Now</a>
-                                <a href="#" class="btn btn-outline-success ">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4" style="max-width: 400px;">
-                        <div class="card">
-                            <img src="./assets/images/samsung_galaxy_ultra.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Samsung Galaxy S22 Ultra 5G</h5>
-
-                                <h6 class="card-text">
-                                    Rs.85,000
-                                </h6>
-                                <a href="#" class="btn btn-success">Buy Now</a>
-                                <a href="#" class="btn btn-outline-success ">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                        </div>";
+                        }
+                    ?>
                 </div>
             </div>
         </div>
+
         <footer class="bg-success p-3">
                 <div class="container-fluid">
                     <h5 class="text-light" style="text-align: center;">This Site is created by Gavin Da Costa</h5>
