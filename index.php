@@ -68,7 +68,7 @@
             <h2 class="text-light">Products</h2><hr>
         </div>
 
-        <div class="row">
+        <div class="row me-5" style="min-height:700px">
             <div class="col-md-2 bg-success-subtle p-4" >
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><h4>Brands</h4></li>
