@@ -289,11 +289,11 @@ function viewMore(){
 }
 }
 
-function cartFunction(){
-    global $conn;
-    if (isset($_GET['add_to_cart'])) {
-        $get_product_id = $_GET['add_to_cart'];
-        $select_query="select * from `car"
-    }
-}
+// function cartFunction(){
+//     global $conn;
+//     if (isset($_GET['add_to_cart'])) {
+//         $get_product_id = $_GET['add_to_cart'];
+//         $select_query="select * from `car";
+//     }
+// }
 ?>

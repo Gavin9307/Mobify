@@ -1,5 +1,5 @@
 <?php
-include("../includes/connect.php");
+include("./includes/connect.php");
 if (isset($_POST['add_user'])) {
     $full_name = $_POST['fname'];
     $user_name = $_POST['cuname'];
@@ -18,7 +18,7 @@ if (isset($_POST['add_user'])) {
         $result_query = mysqli_query($conn, $insert_query);
         if ($result_query) {
             echo "<script>alert('Registration Successful')</script>";
-            echo "<script>location.href='../index.php';</script>";
+            echo "<script>location.href='./index.php';</script>";
         }
     }
 }
@@ -38,7 +38,10 @@ if (isset($_POST['add_user'])) {
 </head>
 
 <body>
-    <div class="container">
+    <?php 
+        include('./header.php');
+    ?>
+    <div class="container mb-5">
         <form action="" method="post" enctype="multipart/form-data" class="mt-4">
             <h3 style="text-align: center;">Register</h3>
             <div class="mb-3">
@@ -48,7 +51,7 @@ if (isset($_POST['add_user'])) {
             <label for="cuname" class="form-label ">Username</label>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">@</span>
-                <input type="text" id="cuname" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" name="cuname" id="cuname" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -72,6 +75,9 @@ if (isset($_POST['add_user'])) {
             <button type="submit" class="btn btn-success" name="add_user">Register</button>
         </form>
     </div>
+    <?php 
+        include('./footer.php');
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
