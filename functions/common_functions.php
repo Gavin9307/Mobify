@@ -292,8 +292,15 @@ function viewMore(){
 // function cartFunction(){
 //     global $conn;
 //     if (isset($_GET['add_to_cart'])) {
-//         $get_product_id = $_GET['add_to_cart'];
-//         $select_query="select * from `car";
+//         // $customer_id =
+//         $product_id = $_GET['add_to_cart'];
+//         $select_query="select * from `cart` where c_id=$customer_id AND p_id=$product_id";
+//         $result_query=mysqli_query($conn,$select_query);
+//         $num_of_rows=mysqli_num_rows($result_query);
+//         if ($num_of_rows>0) {
+//             echo "<script>alert('This item is present inside the cart')</script>";
+//             echo "<script>window.open('index.php','_self')</script>";
+//         }
 //     }
 // }
 ?>
