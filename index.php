@@ -1,6 +1,13 @@
 <?php
     include('./includes/connect.php');
-    include('./functions/common_functions.php')
+    include('./functions/common_functions.php');
+    if(isset($_GET['logout'])){
+        session_start();
+        session_unset();
+        session_destroy();
+        echo "<script>alert('Logout Sucessfull')</script>";
+        echo "<script>location.href='./index.php';</script>";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +34,7 @@
         <div class="navbar navbar-expand-lg bg-success-subtle  bg-primary px-3">
             <div class=" d-flex align-content-baseline justify-content-center gap-2">
                 <i class=" fa-regular fa-user "></i>
-                <a class="nav-link" href=""> Welcome Guest</a>
+                <a class="nav-link" href=""> Welcome <?php session_start(); if(isset($_SESSION["username"])){echo $_SESSION["name"]."<a href='index.php?logout'><button class='ms-3 btn btn-danger' name='logout'>Logout</button></a>";}else{echo"Guest";} ?></a>
             </div>
         </div>
 

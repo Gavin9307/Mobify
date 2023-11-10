@@ -14,6 +14,14 @@ if (isset($_POST['verify_user'])) {
         $db_pass = $db_data['c_pwd'];
         if($db_pass==$user_pass){
             echo "<script>alert('Login Sucessfull')</script>";
+            session_start();
+            $_SESSION['username']=$db_data['c_uname'];
+            $_SESSION['password']=$db_data['c_pwd'];
+            $_SESSION['name']=$db_data['c_fname'];
+            $_SESSION['address']=$db_data['c_add'];
+            $_SESSION['cid']=$db_data['c_id'];
+            $_SESSION['email']=$db_data['c_email'];
+            $_SESSION['phno']=$db_data['c_phno'];
             echo "<script>location.href='./index.php';</script>";
         }
         else{
