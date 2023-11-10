@@ -58,12 +58,9 @@ include('./functions/common_functions.php')
             </div>
         </nav>
 
-        <div class="navbar navbar-expand-lg bg-success-subtle  bg-primary px-3">
-            <div class=" d-flex align-content-baseline justify-content-center gap-2">
-                <i class=" fa-regular fa-user "></i>
-                <a class="nav-link" href=""> Welcome Guest</a>
-            </div>
-        </div>
+        <?php
+        include("./sub_header.php");
+        ?>
 
         <div class="container-fluid bg-success d-flex justify-content-center ">
             <hr>

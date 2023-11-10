@@ -1,5 +1,6 @@
 <?php
 include("./includes/connect.php");
+
 if (isset($_POST['verify_user'])) {
     $user_name = $_POST['cuname'];
     $user_pass = $_POST['upass'];
@@ -29,6 +30,7 @@ if (isset($_POST['verify_user'])) {
         }
     }
 }
+
 ?> 
 <!DOCTYPE html>
 <html lang="en">
