@@ -20,8 +20,19 @@
                     <a class="nav-link active" aria-current="page" href="#">Support</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"><i
-                            class="fa-solid fa-cart-shopping"></i><span><sup>1</sup></span></a>
+                    <a class="nav-link active" aria-current="page" href="./cart.php"><i
+                            class="fa-solid fa-cart-shopping"></i><span><sup>
+                            <?php 
+                                session_start();
+                                if(isset($_SESSION['username'])){
+                                $customer_id = $_SESSION['cid'];
+                                $select_query = "select * from `cart` where c_id=$customer_id";
+                                $result_query = mysqli_query($conn,$select_query);
+                                $num_of_rows = mysqli_num_rows($result_query);
+                                echo $num_of_rows; 
+                            }
+                    ?> 
+                            </sup></span></a>
 
                 </li>
             </ul>
