@@ -23,7 +23,10 @@
                     <a class="nav-link active" aria-current="page" href="./cart.php"><i
                             class="fa-solid fa-cart-shopping"></i><span><sup>
                             <?php 
-                                session_start();
+                                if(!isset($_SESSION)) 
+                                { 
+                                    session_start(); 
+                                } 
                                 if(isset($_SESSION['username'])){
                                 $customer_id = $_SESSION['cid'];
                                 $select_query = "select * from `cart` where c_id=$customer_id";
