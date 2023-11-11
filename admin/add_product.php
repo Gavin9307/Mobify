@@ -6,7 +6,7 @@ if (isset($_POST['add_product'])) {
     $mobile_seller = $_POST['sid'];
     $mobile_brand = $_POST['bid'];
     $mobile_price = $_POST['mprice'];
-
+    $mobile_qty = $_POST['m_qty'];
     $mobile_pic = $_FILES['mimage']['name'];
     $temp_mobile_pic = $_FILES['mimage']['tmp_name'];
 
@@ -17,7 +17,7 @@ if (isset($_POST['add_product'])) {
     else{
         move_uploaded_file($temp_mobile_pic,"../assets/Mobile_Images/$mobile_pic");
         
-        $insert_query = "insert into `product` (p_name,p_price,p_desc,s_id,p_pic,b_id) values ('$mobile_name','$mobile_price','$mobile_desc',$mobile_seller,'$mobile_pic',$mobile_brand)";
+        $insert_query = "insert into `product` (p_name,p_price,p_desc,s_id,p_pic,b_id,p_qty) values ('$mobile_name','$mobile_price','$mobile_desc',$mobile_seller,'$mobile_pic',$mobile_brand,$mobile_qty)";
         $result_query = mysqli_query($conn,$insert_query);
         if($result_query){
             echo "<script>alert('Mobile Added Successfully')</script>";
@@ -76,14 +76,17 @@ if (isset($_POST['add_product'])) {
     <div class="input-group mb-3">
         <span class="input-group-text">&#8377;</span>
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Price" name="mprice">
+            <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Price" name="mprice" required>
             <label for="floatingInputGroup2">Price</label>
         </div>
     </div>
-
+    <div class="mb-3">
+        <label for="InputUMqty1" class="form-label ">Mobile Quantity</label>
+        <input type="number" class="form-control" id="InputMqty1" name="m_qty" autocomplete="off" required>
+    </div>
     <div class="mb-3">
         <label for="formFile" class="form-label">Mobile Image</label>
-        <input class="form-control" type="file" id="formFile" name="mimage">
+        <input class="form-control" type="file" id="formFile" name="mimage" required>
     </div>
 
     <button type="submit" class="btn btn-success" name="add_product">Submit</button>
