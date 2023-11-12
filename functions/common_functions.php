@@ -395,7 +395,7 @@ function cartSummary()
     <h5>Rs $totalPrice</h5>
   </div>
 
-  <button type='button' class='btn btn-success btn-block btn-lg'
-    data-mdb-ripple-color='dark'>Proceed for payment</button>";
+  <a href='payment.php'><button type='button' class='btn btn-success btn-block btn-lg'
+    data-mdb-ripple-color='dark'>Proceed for payment</button></a>";
     }
 }
