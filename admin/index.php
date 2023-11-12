@@ -25,7 +25,7 @@
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light bg-success-subtle ">
             <div class="container-fluid">
-                <img src="#" alt="Logo" class="logo">
+                <img src="../assets/images/logo.jpeg" alt="Logo" width="75px" height="50px">
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -48,7 +48,7 @@
                 <h5 class="text-center">Gavin Da Costa</h5>
                 <div class="button text-center d-flex gap-2">
                     <button><a href="./index.php?add_product" class="nav-link text-light bg-success p-2">Add Mobile</a></button>
-                    <button><a href="" class="nav-link text-light bg-success p-2">View Mobiles</a></button>
+                    <button><a href="./index.php?view_product" class="nav-link text-light bg-success p-2">View Mobiles</a></button>
                     <button><a href="./index.php?add_seller" class="nav-link text-light bg-success p-2">Add
                             Seller</a></button>
                     <button><a href="" class="nav-link text-light bg-success p-2">View Sellers</a></button>
@@ -71,6 +71,9 @@
                 }
                 if(isset($_GET['add_product'])){
                     include('add_product.php');
+                }
+                if(isset($_GET['view_product'])){
+                    include('view_product.php');
                 }
         ?>
         </div>

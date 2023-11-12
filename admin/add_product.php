@@ -27,24 +27,32 @@ if (isset($_POST['add_product'])) {
     echo "<script>location.href='./index.php?add_product';</script>";
 }
 ?>
+<section class="h-100 h-custom " style="background-color: #ffffff;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card-body p-0">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="p-5">
+                                     <form action="" method="post" enctype="multipart/form-data">
+        <h1><strong>Add Mobile</strong></h1>
+        <div class="mb-3">
+            <label for="InputUMname1" class="form-label ">Mobile Name</label>
+            <input type="text" class="form-control" id="InputMname1" name="mname" autocomplete="off" required>
+        </div>
 
-<form action="" method="post" enctype="multipart/form-data">
-    <h3>Add Mobile</h3>
-    <div class="mb-3">
-        <label for="InputUMname1" class="form-label ">Mobile Name</label>
-        <input type="text" class="form-control" id="InputMname1" name="mname" autocomplete="off" required>
-    </div>
+        <div class="mb-3">
+            <label for="FormControlTextarea1" class="form-label">Mobile Description</label>
+            <textarea class="form-control" id="FormControlTextarea1" rows="3" autocomplete="off" required
+                name="mdesc"></textarea>
+        </div>
 
-    <div class="mb-3">
-        <label for="FormControlTextarea1" class="form-label">Mobile Description</label>
-        <textarea class="form-control" id="FormControlTextarea1" rows="3" autocomplete="off" required name="mdesc"></textarea>
-    </div>
-
-    <div>
-        <label for="sname" class="form-label">Enter Seller</label>
-        <select class="form-select mb-3" id="sname" aria-label="Default select example" name="sid">
-            <option selected></option>
-            <?php
+        <div>
+            <label for="sname" class="form-label">Enter Seller</label>
+            <select class="form-select mb-3" id="sname" aria-label="Default select example" name="sid">
+                <option selected></option>
+                <?php
             include('../includes/connect.php');
             $select_query = "select * from `seller`;";
             $result_query = mysqli_query($conn, $select_query);
@@ -54,13 +62,13 @@ if (isset($_POST['add_product'])) {
                 echo "<option value='$seller_id'>$seller_name</option>";
             }
             ?>
-        </select>
-    </div>
-    <div>
-        <label for="bname" class="form-label">Enter Brand</label>
-        <select class="form-select mb-3" id="bname" aria-label="Default select example" name="bid">
-            <option selected></option>
-            <?php
+            </select>
+        </div>
+        <div>
+            <label for="bname" class="form-label">Enter Brand</label>
+            <select class="form-select mb-3" id="bname" aria-label="Default select example" name="bid">
+                <option selected></option>
+                <?php
             include('../includes/connect.php');
             $select_query = "select * from `brand`;";
             $result_query = mysqli_query($conn, $select_query);
@@ -70,24 +78,34 @@ if (isset($_POST['add_product'])) {
                 echo "<option value='$brand_id'>$brand_name</option>";
             }
             ?>
-        </select>
-    </div>
-    <label for="floatingInputGroup2" class="form-label">Mobile Price</label>
-    <div class="input-group mb-3">
-        <span class="input-group-text">&#8377;</span>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Price" name="mprice" required>
-            <label for="floatingInputGroup2">Price</label>
+            </select>
+        </div>
+        <label for="floatingInputGroup2" class="form-label">Mobile Price</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text">&#8377;</span>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Price" name="mprice"
+                    required>
+                <label for="floatingInputGroup2">Price</label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="InputUMqty1" class="form-label ">Mobile Quantity</label>
+            <input type="number" class="form-control" id="InputMqty1" name="m_qty" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Mobile Image</label>
+            <input class="form-control" type="file" id="formFile" name="mimage" required>
+        </div>
+
+        <button type="submit" class="btn btn-success" name="add_product">Submit</button>
+    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="mb-3">
-        <label for="InputUMqty1" class="form-label ">Mobile Quantity</label>
-        <input type="number" class="form-control" id="InputMqty1" name="m_qty" autocomplete="off" required>
-    </div>
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Mobile Image</label>
-        <input class="form-control" type="file" id="formFile" name="mimage" required>
-    </div>
-
-    <button type="submit" class="btn btn-success" name="add_product">Submit</button>
-</form>
+</section>
+   

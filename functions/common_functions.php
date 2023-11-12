@@ -137,6 +137,7 @@ function getBrands()
         </li>";
     }
 }
+
 function searchProducts()
 {
     global $conn;
@@ -173,65 +174,6 @@ function searchProducts()
         }
     }
 }
-
-// function viewMore(){
-//     global $conn;
-//     if (isset($_GET['product_id'])) {
-//             $pro_id = $_GET['product_id'];
-//             $select_query = "select * from `product` where p_id=$pro_id;";
-//             $result_query = mysqli_query($conn, $select_query);
-//             while ($row_data = mysqli_fetch_assoc($result_query)) {
-//                 $product_pic = $row_data['p_pic'];
-//                 $product_id = $row_data['p_id'];
-//                 $product_name = $row_data['p_name'];
-//                 $product_price = $row_data['p_price'];
-//                 $product_description = $row_data['p_desc'];
-
-//                 $seller = $row_data['s_id'];
-//                 $select_seller_query = "select * from `seller` where s_id=$seller;";
-//                 $result_seller_query = mysqli_query($conn, $select_seller_query);
-//                 $row_seller_data = mysqli_fetch_assoc($result_seller_query);
-//                 $s_name = $row_seller_data["s_name"];
-
-//                 $brand = $row_data['b_id'];
-//                 $select_brand_query = "select * from `brand` where b_id=$brand;";
-//                 $result_brand_query = mysqli_query($conn, $select_brand_query);
-//                 $row_brand_data = mysqli_fetch_assoc($result_brand_query);
-//                 $b_name = $row_brand_data["b_name"];
-
-
-
-//                 echo "<div class='col-md-10 '>
-//                 <div class='ms-5 row d-flex justify-content-start mt-4 gap-5'>
-//                     <div class='row mb-5 gap-5' style='height: 400px;'>
-//                     <h2>$product_name</h2>
-//                     <div class='d-flex flex-wrap gap-5 justify-content-evenly'>
-//                         <div class='d-flex flex-wrap gap-5'>
-//                         <div class='d-flex flex-wrap justify-content-center align-items-center'>
-//                             <img src='assets/Mobile_Images/$product_pic' alt='' style='height: 300px;'>
-//                         </div>
-//                         <div class='d-flex flex-wrap flex-column justify-content-evenly align-items-start gap-3'>
-
-//                             <h4>Rs. $product_price</h4>
-//                             <div>
-//                             <h5>Description :</h5>
-//                             <p class=''>$product_description</p>
-//                             </div>
-//                             <h5>Manufacturer : $b_name</h5>
-//                             <h5>Sold By : $s_name</h5>
-//                         </div>
-//                         </div>
-
-//                     </div>
-//                     <div class='d-flex justify-content-end me-5'>
-//                          <a href='#' class='btn btn-success'>Buy Now</a>
-//                     </div>
-//                 </div>
-//                 </div>
-//                 </div>";
-//             }
-//         }
-// }
 
 function viewMore()
 {

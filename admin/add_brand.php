@@ -19,11 +19,28 @@
     }
 ?>
 
-<form action="" method="post">
-    <h3>Add Brand</h3>
-    <div class=" mb-3">
-        <label for="exampleInputUBname1" class="form-label " >Brand Name</label>
-        <input type="text" class="form-control" id="exampleInputBname1" name="bname">
+<section class="h-100 h-custom " style="background-color: #ffffff;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card-body p-0">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="p-5">
+                                <form action="" method="post">
+                                    <h1><strong>Add Brand</strong></h1>
+                                    <div class=" mb-3">
+                                        <label for="exampleInputUBname1" class="form-label " >Brand Name</label>
+                                        <input type="text" class="form-control" id="exampleInputBname1" name="bname">
+                                    </div>
+                                    <button type="submit" class="btn btn-success" name="add_brand">Submit</button>
+                                </form>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-success" name="add_brand">Submit</button>
-</form>
+</section>
