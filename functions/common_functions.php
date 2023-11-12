@@ -380,7 +380,7 @@ function cartSummary()
             $items++;
             $price = $cartData['p_price'];
             $qty = $cartData['buy_qty'];
-            $totalPrice = $totalPrice+($price*$qty);
+            $totalPrice = $totalPrice + ($price * $qty);
         }
         echo "<div class='d-flex justify-content-between mb-4'>
     <h5>Total Items </h5>
