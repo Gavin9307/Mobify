@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,6 +50,7 @@
                 <div class="button text-center d-flex gap-2">
                     <button><a href="./index.php?add_product" class="nav-link text-light bg-success p-2">Add Mobile</a></button>
                     <button><a href="./index.php?view_product" class="nav-link text-light bg-success p-2">View Mobiles</a></button>
+                    <button><a href="./index.php?removed_product" class="nav-link text-light bg-success p-2">Removed Mobiles</a></button>
                     <button><a href="./index.php?add_seller" class="nav-link text-light bg-success p-2">Add
                             Seller</a></button>
                     <button><a href="" class="nav-link text-light bg-success p-2">View Sellers</a></button>
@@ -74,6 +76,9 @@
                 }
                 if(isset($_GET['view_product'])){
                     include('view_product.php');
+                }
+                if(isset($_GET['removed_product'])){
+                    include('removed_product.php');
                 }
         ?>
         </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 11:48 AM
+-- Generation Time: Nov 11, 2023 at 08:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -60,9 +60,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`c_id`, `p_id`, `buy_qty`) VALUES
-(1, 4, 1),
-(5, 1, 2),
-(5, 4, 1);
+(5, 2, 2),
+(5, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -102,13 +101,6 @@ CREATE TABLE `orderpayment` (
   `pt_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orderpayment`
---
-
-INSERT INTO `orderpayment` (`od_id`, `pt_id`) VALUES
-(2, 5);
-
 -- --------------------------------------------------------
 
 --
@@ -121,13 +113,6 @@ CREATE TABLE `orders` (
   `od_date` date NOT NULL,
   `od_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`od_id`, `c_id`, `od_date`, `od_price`) VALUES
-(2, 5, '2023-11-12', 309900);
 
 -- --------------------------------------------------------
 
@@ -153,16 +138,8 @@ CREATE TABLE `orderstrack` (
 CREATE TABLE `payment` (
   `pt_id` int(11) NOT NULL,
   `c_id` int(11) DEFAULT NULL,
-  `pt_total` float DEFAULT NULL,
-  `txn_id` varchar(50) DEFAULT NULL
+  `pt_total` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`pt_id`, `c_id`, `pt_total`, `txn_id`) VALUES
-(5, 5, 309900, '1262174712221');
 
 -- --------------------------------------------------------
 
@@ -190,8 +167,7 @@ INSERT INTO `product` (`p_id`, `p_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `
 (2, 'Apple iPhone 13', 50499, 'Advanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4', 4, 'iphone 13.jpg', 11, 20),
 (3, 'Realme GT Neo 3', 29999, ' 6.7 Inch Full HD+ | AMOLED Display, GT Neo 3 comes With a 120 Hz display and a touch sampling rate of up to 360 Hz', 3, 'realme_gt_neo_3.jpg', 13, 14),
 (4, 'Apple iPhone 14 Pro', 139900, '15.54 cm (6.1-inch) Super Retina XDR display featuring Always-On and ProMotion. ', 4, 'apple_14_pro.jpg', 11, 16),
-(5, 'Redmi Note 11T 5G', 12999, 'Processor: MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0 and clock speed up to 2.4GHz.', 3, 'redmi_note_11t_5g.jpg', 14, 5),
-(6, 'Realme 11x 5G', 15999, 'The powerful MediaTek Dimensity 6100+ 5G chipset delivers a smooth performance', 4, 'realme 11x 5g.webp', 13, 10);
+(5, 'Redmi Note 11T 5G', 12999, 'Processor: MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0 and clock speed up to 2.4GHz.', 3, 'redmi_note_11t_5g.jpg', 14, 5);
 
 -- --------------------------------------------------------
 
@@ -310,25 +286,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `orderstrack`
---
-ALTER TABLE `orderstrack`
-  MODIFY `track_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `pt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `seller`

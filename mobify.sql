@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 11:48 AM
+-- Generation Time: Nov 13, 2023 at 01:01 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -60,9 +60,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`c_id`, `p_id`, `buy_qty`) VALUES
-(1, 4, 1),
-(5, 1, 2),
-(5, 4, 1);
+(5, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -186,12 +184,43 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`p_id`, `p_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `b_id`, `p_qty`) VALUES
-(1, 'Samsung Galaxy S22 Ultra', 85000, '5G Ready powered by Galaxy’s first 4nm processor. Our fastest, most powerful chip ever.', 3, 'samsung_galaxy_ultra.jpg', 12, 15),
-(2, 'Apple iPhone 13', 50499, 'Advanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4', 4, 'iphone 13.jpg', 11, 20),
-(3, 'Realme GT Neo 3', 29999, ' 6.7 Inch Full HD+ | AMOLED Display, GT Neo 3 comes With a 120 Hz display and a touch sampling rate of up to 360 Hz', 3, 'realme_gt_neo_3.jpg', 13, 14),
+(1, 'Samsung Galaxy S22 Ultra', 85000, '5G Ready powered by Galaxy’s first 4nm processor. Our fastest, most powerful chip ever.', 3, 'samsung_galaxy_ultra.jpg', 12, 16),
+(3, 'Realme GT Neo 3', 29999, ' 6.7 Inch Full HD+ | AMOLED Display, GT Neo 3 comes With a 120 Hz display and a touch sampling rate of up to 360 Hz', 3, 'realme_gt_neo_3.jpg', 13, 15);
+
+--
+-- Triggers `product`
+--
+DELIMITER $$
+CREATE TRIGGER `t1` BEFORE DELETE ON `product` FOR EACH ROW BEGIN
+INSERT into productbackup(pb_id,pb_name,p_desc,p_pic,p_price,p_qty,b_id,s_id) VALUES(old.p_id,old.p_name,old.p_desc,old.p_pic,old.p_price,old.p_qty,old.b_id,old.s_id);
+end
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productbackup`
+--
+
+CREATE TABLE `productbackup` (
+  `pb_id` int(11) NOT NULL,
+  `pb_name` varchar(50) DEFAULT NULL,
+  `p_price` float DEFAULT NULL,
+  `p_desc` varchar(250) DEFAULT NULL,
+  `s_id` int(11) DEFAULT NULL,
+  `p_pic` varchar(255) DEFAULT NULL,
+  `b_id` int(11) DEFAULT NULL,
+  `p_qty` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productbackup`
+--
+
+INSERT INTO `productbackup` (`pb_id`, `pb_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `b_id`, `p_qty`) VALUES
 (4, 'Apple iPhone 14 Pro', 139900, '15.54 cm (6.1-inch) Super Retina XDR display featuring Always-On and ProMotion. ', 4, 'apple_14_pro.jpg', 11, 16),
-(5, 'Redmi Note 11T 5G', 12999, 'Processor: MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0 and clock speed up to 2.4GHz.', 3, 'redmi_note_11t_5g.jpg', 14, 5),
-(6, 'Realme 11x 5G', 15999, 'The powerful MediaTek Dimensity 6100+ 5G chipset delivers a smooth performance', 4, 'realme 11x 5g.webp', 13, 10);
+(5, 'Redmi Note 11T 5G', 12999, 'Processor: MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0 and clock speed up to 2.4GHz.', 3, 'redmi_note_11t_5g.jpg', 14, 5);
 
 -- --------------------------------------------------------
 
@@ -280,6 +309,12 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`p_id`),
   ADD KEY `s_id` (`s_id`),
   ADD KEY `b_id` (`b_id`);
+
+--
+-- Indexes for table `productbackup`
+--
+ALTER TABLE `productbackup`
+  ADD PRIMARY KEY (`pb_id`);
 
 --
 -- Indexes for table `seller`
