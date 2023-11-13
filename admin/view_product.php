@@ -96,7 +96,7 @@ if(isset($_POST['update_quantity'])){
                                                         <h6 class='mb-0 '>Rs $product_price</h6>
                                                     </div>
                                                     <div class='col-1 d-flex justify-content-center'>
-                                                        <a href='product_remove.php?removeItem=$product_id' class='text-muted'><i class='fas fa-times'></i></a>
+                                                        <a href='remove.php?removeItem=$product_id' class='text-muted'><i class='fas fa-times'></i></a>
                                                     </div>
                                                 </div>
                                         

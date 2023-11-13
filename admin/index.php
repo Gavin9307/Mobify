@@ -53,12 +53,12 @@
                     <button><a href="./index.php?removed_product" class="nav-link text-light bg-success p-2">Removed Mobiles</a></button>
                     <button><a href="./index.php?add_seller" class="nav-link text-light bg-success p-2">Add
                             Seller</a></button>
-                    <button><a href="" class="nav-link text-light bg-success p-2">View Sellers</a></button>
+                    <button><a href="./index.php?view_seller" class="nav-link text-light bg-success p-2">View Sellers</a></button>
                     <button><a href="./index.php?add_brand" class="nav-link text-light bg-success p-2">Add Brand</a></button>
-                    <button><a href="" class="nav-link text-light bg-success p-2">View Brands</a></button>
+                    <button><a href="./index.php?view_brand" class="nav-link text-light bg-success p-2">View Brands</a></button>
                     <button><a href="" class="nav-link text-light bg-success p-2">All Orders</a></button>
                     <button><a href="" class="nav-link text-light bg-success p-2">All Payments</a></button>
-                    <button><a href="" class="nav-link text-light bg-success p-2">List Users</a></button>
+                    <button><a href="./index.php?view_user" class="nav-link text-light bg-success p-2">List Users</a></button>
                     <button class="bg-danger"><a href="" class="nav-link text-light bg-danger p-2">Logout</a></button>
                 </div>
             </div>
@@ -79,6 +79,15 @@
                 }
                 if(isset($_GET['removed_product'])){
                     include('removed_product.php');
+                }
+                if(isset($_GET['view_seller'])){
+                    include('view_seller.php');
+                }
+                if(isset($_GET['view_brand'])){
+                    include('view_brand.php');
+                }
+                if(isset($_GET['view_user'])){
+                    include('view_user.php');
                 }
         ?>
         </div>
