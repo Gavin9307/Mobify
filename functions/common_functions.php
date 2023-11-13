@@ -341,3 +341,51 @@ function cartSummary()
     data-mdb-ripple-color='dark'>Proceed for payment</button></a>";
     }
 }
+
+
+function getOrderProducts(){
+    global $conn;
+    if (isset($_SESSION['username'])) {
+        $c_id = $_SESSION['cid'];
+        $select_products_query = "SELECT *
+        FROM cart
+        INNER JOIN product ON Product.p_id = cart.p_id
+        WHERE c_id=$c_id;";
+        $result_products_query = mysqli_query($conn, $select_products_query);
+        while ($cartData = mysqli_fetch_assoc($result_products_query)) {
+            $product_id = $cartData['p_id'];
+            $product_pic = $cartData['p_pic'];
+            $product_name = $cartData['p_name'];
+            $buy_quantity = $cartData['buy_qty'];
+            $product_price = $cartData['p_price'];
+            echo "<div class='row mb-4 d-flex justify-content-between align-items-center'>
+            <div class='col-md-2 col-lg-2 col-xl-2'>
+              <img
+                src='./assets/Mobile_Images/$product_pic'
+                class='img-fluid rounded-3' alt='$product_name'>
+            </div>
+            <div class='col-md-3 col-lg-3 col-xl-3'>
+              <h6 class='text-black mb-0'>$product_name</h6>
+            </div>
+            <div class='col-md-3 col-lg-3 col-xl-3 d-flex'>
+
+              <form action='cart.php?pro_id=$product_id' method='post' class='d-flex gap-1'>
+              <input id='form1' min='0' name='quantity' value='$buy_quantity' type='number'
+                class='form-control form-control-sm' />
+
+              <button class='btn btn-dark px-2' name='update_quantity'>Update</button>
+              </form>
+
+            </div>
+            <div class='col-md-3 col-lg-2 col-xl-2 '>
+              <h6 class='mb-0'>Rs $product_price</h6>
+            </div>
+            <div class='col-md-1 col-lg-1 col-xl-1 '>
+              <a href='cart.php?delete_item_cid=$c_id&delete_item_pid=$product_id' class='text-muted'><i class='fas fa-times'></i></a>
+            </div>
+          </div>
+
+          <hr class='my-4'>";
+        }
+    }
+}

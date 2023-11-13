@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2023 at 02:14 PM
+-- Generation Time: Nov 13, 2023 at 01:01 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,10 +50,17 @@ INSERT INTO `brand` (`b_id`, `b_name`) VALUES
 --
 
 CREATE TABLE `cart` (
-  `ct_id` int(11) NOT NULL,
-  `p_id` int(11) DEFAULT NULL,
-  `c_id` int(11) DEFAULT NULL
+  `c_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `buy_qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`c_id`, `p_id`, `buy_qty`) VALUES
+(5, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -76,7 +83,29 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`c_id`, `c_fname`, `c_add`, `c_uname`, `c_pwd`, `c_email`, `c_phno`) VALUES
-(1, 'guest', 'sample address', 'guest', '12345678', 'guest@guest.com', 9312345678);
+(1, 'guest', 'sample address', 'guest', '12345678', 'guest@guest.com', 9312345678),
+(2, 'Gavin', 'Guirdolim Goa', '', '12345678', 'gavindacosta@gmail.com', 12345678),
+(3, 'ascac', 'casca', 'xzcsc', 'acsca', 'scacasc@hac.com', 12345),
+(4, 'Gavin Da Costa', 'Guirdolim Goa', 'gavin', '12345678', 'gavindacosta123@gmail.com', 9307325976),
+(5, 'Wayne', 'Guirdolim Goa', 'wayne', '12345678', 'wayne@gmail.com', 12345678);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderpayment`
+--
+
+CREATE TABLE `orderpayment` (
+  `od_id` int(11) NOT NULL,
+  `pt_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orderpayment`
+--
+
+INSERT INTO `orderpayment` (`od_id`, `pt_id`) VALUES
+(2, 5);
 
 -- --------------------------------------------------------
 
@@ -86,12 +115,17 @@ INSERT INTO `customer` (`c_id`, `c_fname`, `c_add`, `c_uname`, `c_pwd`, `c_email
 
 CREATE TABLE `orders` (
   `od_id` int(11) NOT NULL,
-  `pt_id` int(11) DEFAULT NULL,
-  `c_id` int(11) DEFAULT NULL,
-  `ct_id` int(11) DEFAULT NULL,
-  `od_date` date DEFAULT NULL,
-  `od_price` float DEFAULT NULL
+  `c_id` int(11) NOT NULL,
+  `od_date` date NOT NULL,
+  `od_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`od_id`, `c_id`, `od_date`, `od_price`) VALUES
+(2, 5, '2023-11-12', 309900);
 
 -- --------------------------------------------------------
 
@@ -117,8 +151,16 @@ CREATE TABLE `orderstrack` (
 CREATE TABLE `payment` (
   `pt_id` int(11) NOT NULL,
   `c_id` int(11) DEFAULT NULL,
-  `pt_total` float DEFAULT NULL
+  `pt_total` float DEFAULT NULL,
+  `txn_id` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`pt_id`, `c_id`, `pt_total`, `txn_id`) VALUES
+(5, 5, 309900, '1262174712221');
 
 -- --------------------------------------------------------
 
@@ -133,19 +175,52 @@ CREATE TABLE `product` (
   `p_desc` varchar(250) NOT NULL,
   `s_id` int(11) DEFAULT NULL,
   `p_pic` varchar(255) NOT NULL,
-  `b_id` int(11) NOT NULL
+  `b_id` int(11) NOT NULL,
+  `p_qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`p_id`, `p_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `b_id`) VALUES
-(1, 'Samsung Galaxy S22 Ultra', 85000, '5G Ready powered by Galaxy’s first 4nm processor. Our fastest, most powerful chip ever.', 3, 'samsung_galaxy_ultra.jpg', 12),
-(2, 'Apple iPhone 13', 50499, 'Advanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4', 4, 'iphone 13.jpg', 11),
-(3, 'Realme GT Neo 3', 29999, ' 6.7 Inch Full HD+ | AMOLED Display, GT Neo 3 comes With a 120 Hz display and a touch sampling rate of up to 360 Hz', 3, 'realme_gt_neo_3.jpg', 13),
-(4, 'Apple iPhone 14 Pro', 139900, '15.54 cm (6.1-inch) Super Retina XDR display featuring Always-On and ProMotion. ', 4, 'apple_14_pro.jpg', 11),
-(5, 'Redmi Note 11T 5G', 12999, 'Processor: MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0 and clock speed up to 2.4GHz.', 3, 'redmi_note_11t_5g.jpg', 14);
+INSERT INTO `product` (`p_id`, `p_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `b_id`, `p_qty`) VALUES
+(1, 'Samsung Galaxy S22 Ultra', 85000, '5G Ready powered by Galaxy’s first 4nm processor. Our fastest, most powerful chip ever.', 3, 'samsung_galaxy_ultra.jpg', 12, 16),
+(3, 'Realme GT Neo 3', 29999, ' 6.7 Inch Full HD+ | AMOLED Display, GT Neo 3 comes With a 120 Hz display and a touch sampling rate of up to 360 Hz', 3, 'realme_gt_neo_3.jpg', 13, 15);
+
+--
+-- Triggers `product`
+--
+DELIMITER $$
+CREATE TRIGGER `t1` BEFORE DELETE ON `product` FOR EACH ROW BEGIN
+INSERT into productbackup(pb_id,pb_name,p_desc,p_pic,p_price,p_qty,b_id,s_id) VALUES(old.p_id,old.p_name,old.p_desc,old.p_pic,old.p_price,old.p_qty,old.b_id,old.s_id);
+end
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productbackup`
+--
+
+CREATE TABLE `productbackup` (
+  `pb_id` int(11) NOT NULL,
+  `pb_name` varchar(50) DEFAULT NULL,
+  `p_price` float DEFAULT NULL,
+  `p_desc` varchar(250) DEFAULT NULL,
+  `s_id` int(11) DEFAULT NULL,
+  `p_pic` varchar(255) DEFAULT NULL,
+  `b_id` int(11) DEFAULT NULL,
+  `p_qty` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productbackup`
+--
+
+INSERT INTO `productbackup` (`pb_id`, `pb_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `b_id`, `p_qty`) VALUES
+(4, 'Apple iPhone 14 Pro', 139900, '15.54 cm (6.1-inch) Super Retina XDR display featuring Always-On and ProMotion. ', 4, 'apple_14_pro.jpg', 11, 16),
+(5, 'Redmi Note 11T 5G', 12999, 'Processor: MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0 and clock speed up to 2.4GHz.', 3, 'redmi_note_11t_5g.jpg', 14, 5);
 
 -- --------------------------------------------------------
 
@@ -185,9 +260,9 @@ ALTER TABLE `brand`
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`ct_id`),
-  ADD KEY `c_id` (`c_id`),
-  ADD KEY `p_id` (`p_id`);
+  ADD PRIMARY KEY (`c_id`,`p_id`),
+  ADD KEY `p_id` (`p_id`),
+  ADD KEY `c_id` (`c_id`);
 
 --
 -- Indexes for table `customer`
@@ -198,13 +273,18 @@ ALTER TABLE `customer`
   ADD UNIQUE KEY `c_email` (`c_email`);
 
 --
+-- Indexes for table `orderpayment`
+--
+ALTER TABLE `orderpayment`
+  ADD PRIMARY KEY (`od_id`,`pt_id`),
+  ADD KEY `pt_id` (`pt_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`od_id`),
-  ADD KEY `c_id` (`c_id`),
-  ADD KEY `pt_id` (`pt_id`),
-  ADD KEY `ct_id` (`ct_id`);
+  ADD KEY `c_id` (`c_id`);
 
 --
 -- Indexes for table `orderstrack`
@@ -231,6 +311,12 @@ ALTER TABLE `product`
   ADD KEY `b_id` (`b_id`);
 
 --
+-- Indexes for table `productbackup`
+--
+ALTER TABLE `productbackup`
+  ADD PRIMARY KEY (`pb_id`);
+
+--
 -- Indexes for table `seller`
 --
 ALTER TABLE `seller`
@@ -253,13 +339,31 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `orderstrack`
+--
+ALTER TABLE `orderstrack`
+  MODIFY `track_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `pt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `seller`
@@ -275,16 +379,21 @@ ALTER TABLE `seller`
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`),
-  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`);
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `orderpayment`
+--
+ALTER TABLE `orderpayment`
+  ADD CONSTRAINT `orderpayment_ibfk_1` FOREIGN KEY (`od_id`) REFERENCES `orders` (`od_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `orderpayment_ibfk_2` FOREIGN KEY (`pt_id`) REFERENCES `payment` (`pt_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`pt_id`) REFERENCES `payment` (`pt_id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`ct_id`) REFERENCES `cart` (`ct_id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `orderstrack`
