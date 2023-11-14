@@ -1,3 +1,23 @@
+<?php
+    if(isset($_GET['logout'])){
+        session_start();
+        session_unset();
+        session_destroy();
+        echo "<script>alert('Logout Sucessfull')</script>";
+        echo "<script>location.href='./index.php';</script>";
+    }
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+    if (isset($_SESSION['username'])) {
+        echo " ";
+    }
+    else{
+        echo "<script>alert('Please Login')</script>";
+        echo "<script>location.href='./admin_login.php';</script>";
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +50,17 @@
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="" class="nav-link">Welcome Guest</a>
+                            <a href="" class="nav-link">Welcome 
+                                <?php
+                                 if(!isset($_SESSION)) 
+                                 { 
+                                     session_start(); 
+                                 } 
+                                 if(isset($_SESSION['username'])){
+                                    echo $_SESSION['name'];
+                             }
+                                ?>
+                                </a>
                         </li>
                     </ul>
                 </nav>
@@ -44,7 +74,7 @@
         <div class="row pb-2 bg-success-subtle ">
             <div class="col-md-12 bg-success-subtle d-flex flex-column align-items-center gap-4 pt-4">
                 <a href="">
-                    <img src="../assets/images/samsung_galaxy_ultra.jpg" alt="Admin Image" width="250px" height="250px">
+                    <img class="rounded" src="../assets/images/admin_logo.jpg" alt="Admin Image" width="250px" height="250px">
                 </a>
                 <h5 class="text-center">Gavin Da Costa</h5>
                 <div class="button text-center d-flex gap-2">
@@ -56,10 +86,10 @@
                     <button><a href="./index.php?view_seller" class="nav-link text-light bg-success p-2">View Sellers</a></button>
                     <button><a href="./index.php?add_brand" class="nav-link text-light bg-success p-2">Add Brand</a></button>
                     <button><a href="./index.php?view_brand" class="nav-link text-light bg-success p-2">View Brands</a></button>
-                    <button><a href="" class="nav-link text-light bg-success p-2">All Orders</a></button>
-                    <button><a href="" class="nav-link text-light bg-success p-2">All Payments</a></button>
+                    <button><a href="./index.php?view_brand" class="nav-link text-light bg-success p-2">All Orders</a></button>
+                    <button><a href="./index.php?view_payment" class="nav-link text-light bg-success p-2">All Payments</a></button>
                     <button><a href="./index.php?view_user" class="nav-link text-light bg-success p-2">List Users</a></button>
-                    <button class="bg-danger"><a href="" class="nav-link text-light bg-danger p-2">Logout</a></button>
+                    <button class="bg-danger"><a href="./index.php?logout" class="nav-link text-light bg-danger p-2">Logout</a></button>
                 </div>
             </div>
         </div>
@@ -88,6 +118,9 @@
                 }
                 if(isset($_GET['view_user'])){
                     include('view_user.php');
+                }
+                if(isset($_GET['view_payment'])){
+                    include('view_payment.php');
                 }
         ?>
         </div>

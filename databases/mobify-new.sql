@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2023 at 03:05 AM
+-- Generation Time: Nov 13, 2023 at 05:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,25 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `mobify`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `adm_username` varchar(50) NOT NULL,
-  `adm_password` varchar(50) NOT NULL,
-  `adm_name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`adm_username`, `adm_password`, `adm_name`) VALUES
-('admin', 'admin123', 'Gavin Da Costa');
 
 -- --------------------------------------------------------
 
@@ -119,8 +100,7 @@ CREATE TABLE `orderpayment` (
 --
 
 INSERT INTO `orderpayment` (`od_id`, `pt_id`) VALUES
-(2, 5),
-(3, 6);
+(2, 5);
 
 -- --------------------------------------------------------
 
@@ -140,8 +120,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`od_id`, `c_id`, `od_date`, `od_price`) VALUES
-(2, 5, '2023-11-12', 309900),
-(3, 5, '2023-11-13', 170000);
+(2, 5, '2023-11-12', 309900);
 
 -- --------------------------------------------------------
 
@@ -176,24 +155,7 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`pt_id`, `c_id`, `pt_total`, `txn_id`) VALUES
-(5, 5, 309900, '1262174712221'),
-(6, 5, 170000, '123456789012qdw');
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `paymentview`
--- (See below for the actual view)
---
-CREATE TABLE `paymentview` (
-`pt_id` int(11)
-,`txn_id` varchar(50)
-,`od_id` int(11)
-,`pt_total` float
-,`c_fname` varchar(50)
-,`c_uname` varchar(50)
-,`c_email` varchar(50)
-);
+(5, 5, 309900, '1262174712221');
 
 -- --------------------------------------------------------
 
@@ -276,24 +238,9 @@ CREATE TABLE `seller` (
 INSERT INTO `seller` (`s_id`, `s_name`, `s_add`, `s_uname`, `s_pwd`, `s_email`) VALUES
 (3, 'Margao Electronics', 'Mayfair Apartment, Margao, Goa - 403601 (Near Margao Muncipality, Behind Canara Bank)', 'melectronics', '12345678', 'margaoelectronics@gmail.com');
 
--- --------------------------------------------------------
-
---
--- Structure for view `paymentview`
---
-DROP TABLE IF EXISTS `paymentview`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `paymentview`  AS SELECT `p`.`pt_id` AS `pt_id`, `p`.`txn_id` AS `txn_id`, `op`.`od_id` AS `od_id`, `p`.`pt_total` AS `pt_total`, `c`.`c_fname` AS `c_fname`, `c`.`c_uname` AS `c_uname`, `c`.`c_email` AS `c_email` FROM ((`payment` `p` join `orderpayment` `op` on(`p`.`pt_id` = `op`.`pt_id`)) join `customer` `c` on(`c`.`c_id` = `p`.`c_id`)) ;
-
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`adm_username`);
 
 --
 -- Indexes for table `brand`
@@ -390,7 +337,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orderstrack`
@@ -402,7 +349,7 @@ ALTER TABLE `orderstrack`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `pt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product`
