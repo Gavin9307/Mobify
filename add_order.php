@@ -19,7 +19,12 @@ if (isset($_SESSION['username'])) {
             $price = $cartData['p_price'];
             $qty = $cartData['buy_qty'];
             $totalPrice = $totalPrice + ($price * $qty);
+            $update_query = "UPDATE product
+            SET p_qty = p_qty - $qty
+            WHERE p_id = $p_id;";
+            $result_update_query = mysqli_query($conn,$update_query);
         }
+
         $trans_id = $_POST['tid'];
         $insert_payment_query= "insert into `payment` (c_id,pt_total,txn_id) values ($c_id,$totalPrice,'$trans_id');";
         mysqli_query($conn,$insert_payment_query);
@@ -34,9 +39,7 @@ if (isset($_SESSION['username'])) {
         $insert_order_pt_query = "insert into `orderpayment` (od_id,pt_id) values ($last_insert_id_od,$last_insert_id_pt);";
         mysqli_query($conn,$insert_order_pt_query);
 
-        $insert_customerproduct_query = "INSERT INTO customerproduct (c_id, p_id, buy_qty, od_id)
-SELECT c_id, p_id, buy_qty, $last_insert_id_od AS od_id
-FROM cart;";
+        $insert_customerproduct_query = "INSERT INTO customerproduct (c_id, p_id, buy_qty, od_id) SELECT c_id, p_id, buy_qty, $last_insert_id_od AS od_id FROM cart;";
         mysqli_query($conn,$insert_customerproduct_query);
 
         $delete_cart_query = "DELETE FROM cart
