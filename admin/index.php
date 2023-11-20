@@ -86,7 +86,7 @@
                     <button><a href="./index.php?view_seller" class="nav-link text-light bg-success p-2">View Sellers</a></button>
                     <button><a href="./index.php?add_brand" class="nav-link text-light bg-success p-2">Add Brand</a></button>
                     <button><a href="./index.php?view_brand" class="nav-link text-light bg-success p-2">View Brands</a></button>
-                    <button><a href="./index.php?view_brand" class="nav-link text-light bg-success p-2">All Orders</a></button>
+                    <button><a href="./index.php?view_order" class="nav-link text-light bg-success p-2">All Orders</a></button>
                     <button><a href="./index.php?view_payment" class="nav-link text-light bg-success p-2">All Payments</a></button>
                     <button><a href="./index.php?view_user" class="nav-link text-light bg-success p-2">List Users</a></button>
                     <button class="bg-danger"><a href="./index.php?logout" class="nav-link text-light bg-danger p-2">Logout</a></button>
@@ -118,6 +118,12 @@
                 }
                 if(isset($_GET['view_user'])){
                     include('view_user.php');
+                }
+                if(isset($_GET['view_order'])){
+                    include('view_order.php');
+                }
+                if(isset($_GET['view_order_details'])){
+                    include('view_order_details.php');
                 }
                 if(isset($_GET['view_payment'])){
                     include('view_payment.php');
