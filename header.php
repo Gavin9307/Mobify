@@ -12,14 +12,24 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./register.php">Register</a>
+
+                <?php
+                if(!isset($_SESSION)){session_start();}
+                if(!isset($_SESSION["username"])) {
+                    echo"<li class='nav-item'>
+                    <a class='nav-link active' aria-current='page' href='./register.php'>Register</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./user_login.php">Login</a>
-                </li>
+                <li class='nav-item'>
+                    <a class='nav-link active' aria-current='page' href='./user_login.php'>Login</a>
+                </li>";
+                }
+                ?>
+                
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="./support.php">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./order.php">Orders</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="./cart.php"><i
@@ -29,7 +39,8 @@
                                 { 
                                     session_start(); 
                                 } 
-                                if(isset($_SESSION['username'])){
+                                if((isset($_SESSION['username'], $_SESSION['cid'])))
+                                {
                                 $customer_id = $_SESSION['cid'];
                                 $select_query = "select * from `cart` where c_id=$customer_id";
                                 $result_query = mysqli_query($conn,$select_query);

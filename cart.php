@@ -11,16 +11,30 @@
     }
 
     if(isset($_GET['pro_id'])){
+      if(!isset($_SESSION)){
       session_start();
+      }
+      global $conn;
       $quantity = $_POST['quantity'];
-      $c_id = $_SESSION['cid'];
       $p_id = $_GET['pro_id'];
+
+      $select_query = "select * from product
+      WHERE p_id=$p_id;";
+      $result_select = mysqli_query($conn,$select_query);
+      $row_select = mysqli_fetch_assoc($result_select);
+      if($quantity <= $row_select["p_qty"]){
+      $c_id = $_SESSION['cid'];
       $set_query = "UPDATE `cart`
       SET buy_qty = $quantity
       WHERE c_id=$c_id and p_id=$p_id;";
       $result_select = mysqli_query($conn,$set_query);
       echo "<script>location.href='./cart.php';</script>";
   }
+  else{
+    echo "<script>alert('Max stock available is ".$row_select["p_qty"]."')</script>";
+    echo "<script>location.href='./cart.php';</script>";
+  }
+}
 
   if(isset($_GET['delete_item_cid']) && isset($_GET['delete_item_pid'])){
     global $conn;
