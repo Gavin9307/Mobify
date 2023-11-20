@@ -347,45 +347,75 @@ function getOrderProducts(){
     global $conn;
     if (isset($_SESSION['username'])) {
         $c_id = $_SESSION['cid'];
-        $select_products_query = "SELECT *
-        FROM cart
-        INNER JOIN product ON Product.p_id = cart.p_id
-        WHERE c_id=$c_id;";
+        $select_products_query = "SELECT orders.od_id,orders.od_date,orders.od_price,payment.txn_id 
+        FROM orders
+        INNER JOIN orderpayment on orderpayment.od_id=orders.od_id
+        INNER JOIN payment on payment.pt_id=orderpayment.pt_id 
+        where orders.c_id=$c_id
+        order by od_id desc;";
         $result_products_query = mysqli_query($conn, $select_products_query);
         while ($cartData = mysqli_fetch_assoc($result_products_query)) {
-            $product_id = $cartData['p_id'];
-            $product_pic = $cartData['p_pic'];
-            $product_name = $cartData['p_name'];
-            $buy_quantity = $cartData['buy_qty'];
-            $product_price = $cartData['p_price'];
+           
+            $order_id = $cartData['od_id'];
+            $order_date = $cartData['od_date'];
+            $order_price = $cartData['od_price'];
+            $txn_id = $cartData['txn_id'];
+
             echo "<div class='row mb-4 d-flex justify-content-between align-items-center'>
-            <div class='col-md-2 col-lg-2 col-xl-2'>
-              <img
-                src='./assets/Mobile_Images/$product_pic'
-                class='img-fluid rounded-3' alt='$product_name'>
+            <div class='col-2'>
+              <h6 class='text-black mb-0'>$order_id</h6>
             </div>
-            <div class='col-md-3 col-lg-3 col-xl-3'>
-              <h6 class='text-black mb-0'>$product_name</h6>
+            <div class='col-3'>
+              <h6 class='text-black mb-0'>$order_date</h6>
             </div>
-            <div class='col-md-3 col-lg-3 col-xl-3 d-flex'>
-
-              <form action='cart.php?pro_id=$product_id' method='post' class='d-flex gap-1'>
-              <input id='form1' min='0' name='quantity' value='$buy_quantity' type='number'
-                class='form-control form-control-sm' />
-
-              <button class='btn btn-dark px-2' name='update_quantity'>Update</button>
-              </form>
-
+            <div class='col-2 '>
+              <h6 class='mb-0'>Rs $order_price</h6>
             </div>
-            <div class='col-md-3 col-lg-2 col-xl-2 '>
-              <h6 class='mb-0'>Rs $product_price</h6>
+            <div class='col-3'>
+              <h6 class='text-black mb-0'>$txn_id</h6>
             </div>
-            <div class='col-md-1 col-lg-1 col-xl-1 '>
-              <a href='cart.php?delete_item_cid=$c_id&delete_item_pid=$product_id' class='text-muted'><i class='fas fa-times'></i></a>
+            <div class='col-2'>
+                <a href='order_details.php?view_order_details=$order_id'>
+                    <button class='btn btn-dark px-2' name='view_od_details'>View Details</button>
+                </a>
             </div>
           </div>
 
           <hr class='my-4'>";
         }
     }
+}
+
+function getOrderProducts_details(){
+    global $conn;
+                                            $od_id = $_GET['view_order_details'];
+                                            $select_query = "SELECT product.p_pic,product.p_name,product.p_price,customerproduct.buy_qty
+                                            FROM `customerproduct`
+                                            INNER JOIN product on product.p_id=customerproduct.p_id
+                                            WHERE customerproduct.od_id=$od_id;";
+                                            $result_select_query = mysqli_query($conn,$select_query);
+                                            while ($cartData = mysqli_fetch_assoc($result_select_query)) {
+                                                $product_pic = $cartData['p_pic'];
+                                                $product_name = $cartData['p_name'];
+                                                $buy_quantity = $cartData['buy_qty'];
+                                                $product_price = $cartData['p_price'];
+                                                echo "<div class='row mb-4 d-flex justify-content-between align-items-center'>
+                                                <div class='col-2'>
+                                                  <img
+                                                    src='./assets/Mobile_Images/$product_pic'
+                                                    class='img-fluid rounded-3' alt='$product_name'>
+                                                </div>
+                                                <div class='col-4'>
+                                                  <h6 class='text-black mb-0'>$product_name</h6>
+                                                </div>
+                                                <div class='col-3'>
+                                                  <h6 class='text-black mb-0'>$buy_quantity</h6>
+                                                </div>
+                                                <div class='col-3'>
+                                                  <h6 class='mb-0'>Rs $product_price</h6>
+                                                </div>
+                                              </div>
+                                    
+                                              <hr class='my-4'>";
+                                            }
 }

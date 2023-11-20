@@ -1,4 +1,3 @@
-<!--  -->
 
 <?php
 include('../includes/connect.php');
@@ -21,7 +20,7 @@ include('../includes/connect.php');
                                         ?>
                                     </h1>
                                 </div>
-
+ 
                                 <div class="row mb-4 d-flex justify-content-between align-items-center">
                                     <div class="col-2">
                                         <h6>Photo</h6>

@@ -48,14 +48,3 @@ FROM cart;";
     }
 }
 ?>
-
-
-
-<!-- SELECT orders.od_id,orders.od_date,product.p_pic,product.p_name,customerproduct.buy_qty,product.p_price,payment.txn_id
-FROM customerproduct
-INNER JOIN product ON Product.p_id = customerproduct.p_id
-INNER JOIN customer ON customer.c_id = customerproduct.c_id
-INNER JOIN payment ON payment.c_id = customerproduct.c_id
-INNER JOIN orderpayment ON orderpayment.pt_id = payment.pt_id
-INNER JOIN orders ON orders.od_id = orderpayment.od_id
-WHERE customerproduct.c_id=5; -->
