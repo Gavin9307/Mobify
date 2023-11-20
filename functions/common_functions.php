@@ -1,6 +1,5 @@
 <?php
 include('./includes/connect.php');
-// getting Products
 function getProducts()
 {
     global $conn;
@@ -13,7 +12,7 @@ function getProducts()
                 $product_id = $row_data['p_id'];
                 $product_name = $row_data['p_name'];
                 $product_price = $row_data['p_price'];
-                echo "<div class='col-md-4 mb-4 ' style='max-width: 300px;min-width:200px'>
+                echo "<div class='col-md-4 mb-4 ' style='max-width: 270px'>
             <div class='card'>
                 <a href='product_details.php?product_id=$product_id'>
                 <img src='./assets/Mobile_Images/$product_pic' class='card-img-top' alt='...'>
@@ -47,7 +46,7 @@ function getUniqueProductSeller()
                 $product_pic = $row_data['p_pic'];
                 $product_name = $row_data['p_name'];
                 $product_price = $row_data['p_price'];
-                echo "<div class='col-md-4 mb-4 ' style='max-width: 300px;min-width:200px'>
+                echo "<div class='col-md-4 mb-4 ' style='max-width: 270px;min-width:200px'>
             <div class='card'>
             <a href='product_details.php?product_id=$product_id'>
                 <img src='./assets/Mobile_Images/$product_pic' class='card-img-top' alt='...'>
@@ -86,7 +85,7 @@ function getUniqueProductBrand()
                 $product_pic = $row_data['p_pic'];
                 $product_name = $row_data['p_name'];
                 $product_price = $row_data['p_price'];
-                echo "<div class='col-md-4 mb-4 ' style='max-width: 300px;min-width:200px'>
+                echo "<div class='col-md-4 mb-4 ' style='max-width: 270px;min-width:200px'>
             <div class='card'>
             <a href='product_details.php?product_id=$product_id'>
                 <img src='./assets/Mobile_Images/$product_pic' class='card-img-top' alt='...'>
@@ -152,7 +151,7 @@ function searchProducts()
                 $product_pic = $row_data['p_pic'];
                 $product_name = $row_data['p_name'];
                 $product_price = $row_data['p_price'];
-                echo "<div class='col-md-4 mb-4 ' style='max-width: 300px;min-width:200px'>
+                echo "<div class='col-md-4 mb-4 ' style='max-width: 270px;min-width:200px'>
             <div class='card'>
             <a href='product_details.php?product_id=$product_id'>
                 <img src='./assets/Mobile_Images/$product_pic' class='card-img-top' alt='...'>
@@ -388,34 +387,29 @@ function getOrderProducts(){
 
 function getOrderProducts_details(){
     global $conn;
-                                            $od_id = $_GET['view_order_details'];
-                                            $select_query = "SELECT product.p_pic,product.p_name,product.p_price,customerproduct.buy_qty
-                                            FROM `customerproduct`
-                                            INNER JOIN product on product.p_id=customerproduct.p_id
-                                            WHERE customerproduct.od_id=$od_id;";
-                                            $result_select_query = mysqli_query($conn,$select_query);
-                                            while ($cartData = mysqli_fetch_assoc($result_select_query)) {
-                                                $product_pic = $cartData['p_pic'];
-                                                $product_name = $cartData['p_name'];
-                                                $buy_quantity = $cartData['buy_qty'];
-                                                $product_price = $cartData['p_price'];
-                                                echo "<div class='row mb-4 d-flex justify-content-between align-items-center'>
-                                                <div class='col-2'>
-                                                  <img
-                                                    src='./assets/Mobile_Images/$product_pic'
-                                                    class='img-fluid rounded-3' alt='$product_name'>
-                                                </div>
-                                                <div class='col-4'>
-                                                  <h6 class='text-black mb-0'>$product_name</h6>
-                                                </div>
-                                                <div class='col-3'>
-                                                  <h6 class='text-black mb-0'>$buy_quantity</h6>
-                                                </div>
-                                                <div class='col-3'>
-                                                  <h6 class='mb-0'>Rs $product_price</h6>
-                                                </div>
-                                              </div>
+        $od_id = $_GET['view_order_details'];
+        $select_query = "SELECT product.p_pic,product.p_name,product.p_price,customerproduct.buy_qty FROM `customerproduct` INNER JOIN product on product.p_id=customerproduct.p_id WHERE customerproduct.od_id=$od_id;";
+        $result_select_query = mysqli_query($conn,$select_query);
+        while ($cartData = mysqli_fetch_assoc($result_select_query)) {
+        $product_pic = $cartData['p_pic'];
+        $product_name = $cartData['p_name'];
+        $buy_quantity = $cartData['buy_qty'];
+        $product_price = $cartData['p_price'];                                    
+        echo "<div class='row mb-4 d-flex justify-content-between align-items-center'>
+            <div class='col-2'>
+                <img src='./assets/Mobile_Images/$product_pic' class='img-fluid rounded-3' alt='$product_name'>
+            </div>
+            <div class='col-4'>
+                <h6 class='text-black mb-0'>$product_name</h6>
+            </div>
+            <div class='col-3'>
+                <h6 class='text-black mb-0'>$buy_quantity</h6>
+            </div>
+            <div class='col-3'>
+            <h6 class='mb-0'>Rs $product_price</h6>
+            </div>
+        </div>
                                     
-                                              <hr class='my-4'>";
-                                            }
+        <hr class='my-4'>";
+    }
 }
