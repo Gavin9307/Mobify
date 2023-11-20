@@ -1,16 +1,6 @@
 <?php
 include('../includes/connect.php');
-if(isset($_POST['update_quantity'])){
-    global $conn;
-    $pro_qty = $_POST['quantity'];
-    $p_id = $_POST['p_id'];
-    $update_query = "UPDATE `product`
-    SET p_qty = $pro_qty
-    WHERE p_id=$p_id;";
-    $result_update_query = mysqli_query($conn,$update_query);
-    echo "<script>alert('Product Quantity Updated Successfully')</script>";
-    echo "<script>location.href='index.php?view_product';</script>";
-}
+
 ?>
 
 <section class="h-100 h-custom " style="background-color: #ffffff;">

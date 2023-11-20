@@ -34,10 +34,10 @@ if (isset($_SESSION['username'])) {
         $insert_order_pt_query = "insert into `orderpayment` (od_id,pt_id) values ($last_insert_id_od,$last_insert_id_pt);";
         mysqli_query($conn,$insert_order_pt_query);
 
-            $insert_customerproduct_query = "INSERT INTO customerproduct (c_id, p_id, buy_qty, od_id)
+        $insert_customerproduct_query = "INSERT INTO customerproduct (c_id, p_id, buy_qty, od_id)
 SELECT c_id, p_id, buy_qty, $last_insert_id_od AS od_id
 FROM cart;";
-            mysqli_query($conn,$insert_customerproduct_query);
+        mysqli_query($conn,$insert_customerproduct_query);
 
         $delete_cart_query = "DELETE FROM cart
         WHERE c_id = $c_id;";

@@ -10,7 +10,7 @@
     { 
         session_start(); 
     } 
-    if (isset($_SESSION['username'])) {
+    if (isset($_SESSION['adm_username'])) {
         echo " ";
     }
     else{
@@ -56,8 +56,8 @@
                                  { 
                                      session_start(); 
                                  } 
-                                 if(isset($_SESSION['username'])){
-                                    echo $_SESSION['name'];
+                                 if(isset($_SESSION['adm_username'])){
+                                    echo $_SESSION['adm_name'];
                              }
                                 ?>
                                 </a>

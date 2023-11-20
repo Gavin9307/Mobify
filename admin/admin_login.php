@@ -16,9 +16,9 @@ if (isset($_POST['verify_admin'])) {
         if($db_pass==$user_pass){
             echo "<script>alert('Login Sucessfull')</script>";
             session_start();
-            $_SESSION['username']=$db_data['adm_username'];
-            $_SESSION['password']=$db_data['adm_password'];
-            $_SESSION['name']=$db_data['adm_name'];
+            $_SESSION['adm_username']=$db_data['adm_username'];
+            $_SESSION['adm_password']=$db_data['adm_password'];
+            $_SESSION['adm_name']=$db_data['adm_name'];
             echo "<script>location.href='./index.php?add_product';</script>";
         }
         else{
