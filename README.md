@@ -11,7 +11,6 @@ MOBIFY is an online mobile shopping website. This system consists of customers a
 ## Tools of Development
 - HTML 5
 - CSS 3
-- JavaScript
 - PHP 8.2.4
 - MySQL Database
 - Bootstrap 5.3
