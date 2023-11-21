@@ -41,7 +41,7 @@ include('../includes/connect.php');
                                 <?php 
                                             global $conn;
                                         
-                                            $select_query = "select * from paymentview;";
+                                            $select_query = "select * from paymentview order by od_id desc;";
                                             $result_select_query = mysqli_query($conn,$select_query);
                                             while($rowData = mysqli_fetch_assoc($result_select_query)){
                                                 $customer_name = $rowData['c_fname'];
