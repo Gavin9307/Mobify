@@ -6,7 +6,7 @@ Status: **Completed**\
 Updated on: November 23th, 2023
 
 ## Project Description
-MOBIFY is an online mobile shopping website. This system consists of customers, seller and an admin. Customer can view mobiles listed by the admin or the seller, add item to the cart, pay for order, and view their order history. Admin can edit the mobile information, manage customer orders, and view information about all orders, customers, sellers and can add or remove brands.
+MOBIFY is an online mobile shopping website. This system consists of customers and an admin. Customer can view mobiles listed by the admin , add item to the cart, pay for order, and view their order history. Admin can edit the mobile information, manage customer orders, and view information about all orders, customers, sellers and can add or remove brands.
 
 ## Tools of Development
 - HTML 5
