@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2023 at 07:04 PM
+-- Generation Time: Nov 20, 2023 at 04:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -177,6 +177,21 @@ INSERT INTO `orders` (`od_id`, `c_id`, `od_date`, `od_price`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orderstrack`
+--
+
+CREATE TABLE `orderstrack` (
+  `od_id` int(11) DEFAULT NULL,
+  `s_id` int(11) DEFAULT NULL,
+  `c_id` int(11) DEFAULT NULL,
+  `track_id` int(11) NOT NULL,
+  `track_status` varchar(50) DEFAULT NULL,
+  `del_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payment`
 --
 
@@ -239,6 +254,7 @@ INSERT INTO `product` (`p_id`, `p_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `
 (1, 'Samsung Galaxy S22 Ultra', 85000, '5G Ready powered by Galaxy’s first 4nm processor. Our fastest, most powerful chip ever.', 3, 'samsung_galaxy_ultra.jpg', 12, 10),
 (7, 'Redmi 12 5G Jade Black', 11999, 'Snapdragon 4 Gen 2 Mobile Platform : Power efficient 4nm architecture', 3, 'Redmi 12 5G.jpg', 14, 10),
 (8, 'Apple iPhone 14 Pro (128 GB)', 129900, '15.54 cm (6.1-inch) Super Retina XDR display featuring Always-On and ProMotion', 6, 'apple_14_pro.jpg', 11, 19),
+(9, 'Realme GT Neo 3', 28990, 'GT Neo 3 comes With a 120 Hz display and a touch sampling rate of up to 360 Hz', 6, 'realme_gt_neo_3.jpg', 17, 50),
 (10, 'Realme 11x 5G', 16499, '8 GB RAM | 128 GB ROM | Expandable Upto 2 TB', 3, 'realme 11x 5g.webp', 17, 10),
 (11, 'Redmi Note 11T 5G', 17999, 'MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0', 6, 'redmi_note_11t_5g.jpg', 14, 25),
 (12, 'Apple iPhone 13', 51999, 'Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording', 6, 'iphone 13.jpg', 11, 5);
@@ -276,8 +292,7 @@ CREATE TABLE `productbackup` (
 
 INSERT INTO `productbackup` (`pb_id`, `pb_name`, `p_price`, `p_desc`, `s_id`, `p_pic`, `b_id`, `p_qty`) VALUES
 (4, 'Apple iPhone 14 Pro', 139900, '15.54 cm (6.1-inch) Super Retina XDR display featuring Always-On and ProMotion. ', 4, 'apple_14_pro.jpg', 11, 16),
-(5, 'Redmi Note 11T 5G', 12999, 'Processor: MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0 and clock speed up to 2.4GHz.', 3, 'redmi_note_11t_5g.jpg', 14, 5),
-(9, 'Realme GT Neo 3', 28990, 'GT Neo 3 comes With a 120 Hz display and a touch sampling rate of up to 360 Hz', 6, 'realme_gt_neo_3.jpg', 17, 50);
+(5, 'Redmi Note 11T 5G', 12999, 'Processor: MediaTek Dimensity 810 Octa-core 5G processor based on 6nm process with HyperEngine 2.0 and clock speed up to 2.4GHz.', 3, 'redmi_note_11t_5g.jpg', 14, 5);
 
 -- --------------------------------------------------------
 
@@ -364,6 +379,15 @@ ALTER TABLE `orders`
   ADD KEY `c_id` (`c_id`);
 
 --
+-- Indexes for table `orderstrack`
+--
+ALTER TABLE `orderstrack`
+  ADD PRIMARY KEY (`track_id`),
+  ADD KEY `c_id` (`c_id`),
+  ADD KEY `s_id` (`s_id`),
+  ADD KEY `od_id` (`od_id`);
+
+--
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
@@ -422,6 +446,12 @@ ALTER TABLE `orders`
   MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `orderstrack`
+--
+ALTER TABLE `orderstrack`
+  MODIFY `track_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
@@ -462,6 +492,14 @@ ALTER TABLE `orderpayment`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `orderstrack`
+--
+ALTER TABLE `orderstrack`
+  ADD CONSTRAINT `orderstrack_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`),
+  ADD CONSTRAINT `orderstrack_ibfk_2` FOREIGN KEY (`s_id`) REFERENCES `seller` (`s_id`),
+  ADD CONSTRAINT `orderstrack_ibfk_3` FOREIGN KEY (`od_id`) REFERENCES `orders` (`od_id`);
 
 --
 -- Constraints for table `payment`
