@@ -32,6 +32,9 @@
                     <a class="nav-link active" aria-current="page" href="./order.php">Orders</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./admin/index.php">Admin</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="./cart.php"><i
                             class="fa-solid fa-cart-shopping"></i><span><sup>
                             <?php 
